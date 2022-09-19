@@ -1,0 +1,633 @@
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/plain"; Charset=UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/ethereumjs/browser-builds/master/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.js"></script>
+<script src="https://unpkg.com/moralis-v1@latest/dist/moralis.js"></script>
+</script> 
+
+  
+
+<STYLE TYPE="text/css">
+.answers li {
+list-style: upper-alpha;
+}
+
+label {
+margin-left: 0.5em;
+cursor: pointer;
+}
+
+#results {
+background: #dddada;
+color: 000000;
+padding: 3px;
+text-align: center;
+width: 200px;
+cursor: pointer;
+border: 1px solid gray;
+}
+
+#results:hover {
+background: #3d91b8;
+color: #ffffff;
+padding: 3px;
+text-align: center;
+width: 200px;
+cursor: pointer;
+border: 1px solid gray;
+}
+
+
+
+
+
+#closing {
+display: none;
+#font-style: italic;
+}  
+
+#answers{
+    border:3px solid magenta;
+    width:249px;
+    float:left;
+    font-size: 0.875em;
+    padding:0 20px 0;
+}
+
+#answers[type="radio"]{
+    float: left;
+}
+
+img {
+width:400px;
+height:300px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1 style="color:#013220; font-family: Papyrus;"> H.I.T. Jobs </h1>
+<p style="color:#013220; font-family: Papyrus;">Blockchain-powered Human Intelligence Tasks - Earn Crypto!</p>
+<a href="hack_mainpage.html">main page</a>
+
+
+
+<p> Please carefully read the instructions: </p>
+<p class='instruction' id="instructions"></p>	
+
+
+<p id="balance" style="color:#66ff00;"></p>
+						
+					 
+<p class='question' id="question1"></p>	
+<input type="text" id="answer1" style="color:grey; font-family: helvetica narrow, sans-serif; font-size:x-large;"><label style="color:#DCDCDC; font-family: helvetica narrow, sans-serif;font-size: large; position:absolute; top:183; right:795;"></label>	
+
+												 
+<p class='question' id="question2"></p>	
+<input type="text" id="answer2" style="color:grey; font-family: helvetica narrow, sans-serif; font-size:x-large;"><label style="color:#DCDCDC; font-family: helvetica narrow, sans-serif;font-size: large; position:absolute; top:183; right:795;"></label>
+
+											 
+<p class='question' id="question3"></p>	
+<input type="text" id="answer3" style="color:grey; font-family: helvetica narrow, sans-serif; font-size:x-large;"><label style="color:#DCDCDC; font-family: helvetica narrow, sans-serif;font-size: large; position:absolute; top:183; right:795;"></label>							
+
+									 
+<p class='question' id="question4"></p>	
+<input type="text" id="answer4"  style="color:grey; font-family: helvetica narrow, sans-serif; font-size:x-large;"><label style="color:#DCDCDC; font-family: helvetica narrow, sans-serif;font-size: large; position:absolute; top:183; right:795;"></label>							
+
+				
+<p class='question' id="question5"></p>	
+<input type="text" id="answer5" style="color:grey; font-family: helvetica narrow, sans-serif; font-size:x-large;"><label style="color:#DCDCDC; font-family: helvetica narrow, sans-serif;font-size: large; position:absolute; top:183; right:795;"></label>						
+
+						 
+<p class='question' id="question6"></p>	
+<input type="text" id="answer6" style="color:grey; font-family: helvetica narrow, sans-serif; font-size:x-large;"><label style="color:#DCDCDC; font-family: helvetica narrow, sans-serif;font-size: large; position:absolute; top:183; right:795;"></label>							
+
+
+<p class='question' id="question7"></p>	
+<input type="text" id="answer7" style="color:grey; font-family: helvetica narrow, sans-serif; font-size:x-large;"><label style="color:#DCDCDC; font-family: helvetica narrow, sans-serif;font-size: large; position:absolute; top:183; right:795;"></label>						
+
+
+<p class='question' id="question8"></p>		
+<input type="text" id="answer8" style="color:grey; font-family: helvetica narrow, sans-serif; font-size:x-large;"><label style="color:#DCDCDC; font-family: helvetica narrow, sans-serif;font-size: large; position:absolute; top:183; right:795;"></label>						
+
+
+<p class='question' id="question9"></p>		
+<input type="text" id="answer9" style="color:grey; font-family: helvetica narrow, sans-serif; font-size:x-large;"><label style="color:#DCDCDC; font-family: helvetica narrow, sans-serif;font-size: large; position:absolute; top:183; right:795;"></label>						
+
+
+<p class='question' id="question10"></p>		
+<input type="text" id="answer10" style="color:grey; font-family: helvetica narrow, sans-serif; font-size:x-large;"><label style="color:#DCDCDC; font-family: helvetica narrow, sans-serif;font-size: large; position:absolute; top:183; right:795;"></label>
+					
+
+
+		
+
+
+
+
+
+
+	
+
+
+
+	
+<input type="button" value="SUBMIT" style="color:grey; font-family: helvetica narrow, sans-serif;font-size: large;" onClick="check_answers()"/>	
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+<script>
+//https://bafybeicuofou2gs545lhbxdra6kjyradpb2fyocqgqfumz3fptvdf2pzgu.ipfs.nftstorage.link/
+//<input type="button" value="send .25 matic" style="color:grey; font-family: helvetica narrow, sans-serif;font-size: large; position:absolute; top:15; right:15;" onClick="click_get()"/>	
+
+const serverUrl = "https://jgvwtbhpz221.usemoralis.com:2053/server";
+      const appId = "jWYZTSxykRh5PsXRtoXPWu3coM5QDQAWJCwvXR51";
+      Moralis.start({ serverUrl, appId });
+              
+
+var metamask = (async function(){
+  	
+  await ethereum.enable();
+  	
+  
+  //alert(balance)
+
+})()
+
+web3 = new Web3(web3.currentProvider);        
+
+//var web3 = new Web3(new Web3.providers.HttpProvider(
+    //"https://mainnet.infura.io/v3/69462286c61f42d2891a2ced35c91f8d"
+//));
+
+var my_nft =(async function(){
+
+var net = await web3.eth.net.getNetworkType()
+var chain = await web3.eth.net.getId()
+//alert(chain)
+if(chain!=3)
+//if(str(net).indexOf("Polygon") > -1) 
+{alert("Please connect to the Ropsten Test Network to use this dApp")};
+})()
+
+web3.eth.net.getNetworkType()
+.then(console.log);
+
+web3.eth.net.isListening()
+   .then(() => console.log('web3 is connected'))
+   .catch(e => console.log('Wow. Something went wrong'));
+
+
+//NFT Pass Key//
+//const contract = new web3.eth.Contract(contractAbi, contractAddress);
+//const tokenBalance = await contract.methods.balanceOf(walletAddress).call();
+
+
+
+const abi = [
+	{
+		"inputs": [],
+		"name": "answer",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "answers",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "correct",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "fee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "filename",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_filename",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer0",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer1",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer2",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer3",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer4",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer5",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer6",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer7",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer8",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer9",
+				"type": "string"
+			}
+		],
+		"name": "setUptask",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer0",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer1",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer2",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer3",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer4",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer5",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer6",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer7",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer8",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer9",
+				"type": "string"
+			}
+		],
+		"name": "verifyAnswer",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	}
+]	
+
+
+//var contract_address = web3.utils.toChecksumAddress("0x17868047286a8ec9ace12d359eb9c3eef54aeb62")
+
+
+var my_nft =(async function(){
+var contract_address = await web3.utils.toChecksumAddress("0x17868047286a8ec9ace12d359eb9c3eef54aeb62")
+
+var contract_bal = await new web3.eth.Contract(abi, contract_address);
+var file_name = await contract_bal.methods.filename().call();
+//alert(file_name)
+
+
+
+
+const query = new Moralis.Query("Applications");
+query.equalTo("name", file_name);
+query.find().then(function ([application]) {
+  const ipfs = application.get("resume").ipfs();
+  const hash = application.get("resume").hash();
+  loadJSON(ipfs, myData,'jsonp');
+  console.log("IPFS url", ipfs);
+  console.log("IPFS hash", hash);
+});
+
+
+
+// loadJSON method to open the JSON file.
+function loadJSON(path, success, error) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        success(JSON.parse(xhr.responseText));
+      }
+      else {
+        error(xhr);
+      }
+    }
+  };
+  xhr.open('GET', path, true);
+  xhr.send();
+}
+
+})()
+
+function myData(Data)
+{
+
+  // Output only the details on the first post
+  console.log(Data["questions"][1]["image_url"]);
+  //document.getElementById("image1").src = Data["questions"][1]["image_url"];
+  document.getElementById("instructions").innerHTML = Data["questions"][0]["question"];
+  document.getElementById("question1").innerHTML = Data["questions"][1]["question"];
+  if (Data["questions"][1]["image_url"] != "image"){
+  var img = new Image();
+  
+	img.src = Data["questions"][1]["image_url"];
+  document.getElementById("question1").appendChild(img);}
+  if (Data["questions"][2]["image_url"] != "image"){
+  var img = new Image();
+  
+	img.src = Data["questions"][2]["image_url"];
+  document.getElementById("question1").appendChild(img);}
+  document.getElementById("question2").innerHTML = Data["questions"][2]["question"];
+  if (Data["questions"][3]["image_url"] != "image"){
+  var img = new Image();
+  
+	img.src = Data["questions"][3]["image_url"];
+	document.getElementById("question1").appendChild(img);}
+  document.getElementById("question3").innerHTML = Data["questions"][3]["question"]; 
+  if (Data["questions"][4]["image_url"] != "image"){
+  var img = new Image();
+  
+	img.src = Data["questions"][4]["image_url"];
+	document.getElementById("question1").appendChild(img);}
+  document.getElementById("question4").innerHTML = Data["questions"][4]["question"];
+  if (Data["questions"][5]["image_url"] != "image"){
+  var img = new Image();
+  
+	img.src = Data["questions"][5]["image_url"];
+	document.getElementById("question1").appendChild(img);}
+  document.getElementById("question5").innerHTML = Data["questions"][5]["question"];
+  if (Data["questions"][6]["image_url"] != "image"){
+  var img = new Image();
+  
+	img.src = Data["questions"][6]["image_url"];
+	document.getElementById("question1").appendChild(img);}
+  document.getElementById("question6").innerHTML = Data["questions"][6]["question"];
+  if (Data["questions"][7]["image_url"] != "image"){
+  var img = new Image();
+  
+	img.src = Data["questions"][7]["image_url"];
+	document.getElementById("question1").appendChild(img);}
+  document.getElementById("question7").innerHTML = Data["questions"][7]["question"]; 
+  if (Data["questions"][8]["image_url"] != "image"){
+  var img = new Image();
+  
+	img.src = Data["questions"][8]["image_url"];
+	document.getElementById("question1").appendChild(img);}
+  document.getElementById("question8").innerHTML = Data["questions"][8]["question"];
+  if (Data["questions"][9]["image_url"] != "image"){
+  var img = new Image();
+  
+	img.src = Data["questions"][9]["image_url"];
+	document.getElementById("question1").appendChild(img);}
+  document.getElementById("question9").innerHTML = Data["questions"][9]["question"];  
+  if (Data["questions"][10]["image_url"] != "image"){
+  var img = new Image();
+  
+	img.src = Data["questions"][10]["image_url"];
+	document.getElementById("question1").appendChild(img);}
+  document.getElementById("question10").innerHTML = Data["questions"][10]["question"];
+  // output the details of first three posts
+  //console.log("First three posts");
+  //for(var i=0; i<3; i=i+1)
+  //{
+    //console.log(Data[i]);
+  //} 
+  // output the id field of first five elements. 
+  //console.log("First five ID");
+  //for(var i=0; i<5; i=i+1)
+  //{
+    //console.log(Data[i].id);
+  //}
+}	
+		
+		
+		
+		
+		
+		
+
+
+
+
+
+
+
+
+
+const contract_address = web3.utils.toChecksumAddress("0x17868047286a8ec9ace12d359eb9c3eef54aeb62")
+
+const contract_bal = new web3.eth.Contract(abi, contract_address);
+
+const wallet_address = "0xBC7f9EbC7dBCc236873f37005cfD959523faB727"
+
+
+
+
+
+
+
+
+function check_answers(){
+
+	//var nft = add1x[0];
+	//var address = add2x
+	//var nft_id = tokenID[0];
+	//var num = n
+	
+	//to_approve(nft, nft_id)
+var acct = (async function(){
+  	
+  //var result = await getAccounts()
+	await window.ethereum.enable();
+	
+		var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        var account = accounts[0];
+		//console.log("account " + account);
+		//console.log("nft address " + nft);
+		//console.log("nft id " + nft_id);
+		//const contract_address1 = web3.utils.toChecksumAddress(nft);
+		//var filename = document.getElementById("file_name").value;
+		var answer1 = document.getElementById("answer1").value;
+		var answer2 = document.getElementById("answer2").value;
+		var answer3 = document.getElementById("answer3").value;
+		var answer4 = document.getElementById("answer4").value;
+		var answer5 = document.getElementById("answer5").value;
+		var answer6 = document.getElementById("answer6").value;
+		var answer7 = document.getElementById("answer7").value;
+		var answer8 = document.getElementById("answer8").value;
+		var answer9 = document.getElementById("answer9").value;
+		var answer10 = document.getElementById("answer10").value;
+		//var contract_bal = await new web3.eth.Contract(abi, nft).methods.balanceOf(account, nft_id).call();
+		//var supply = await new web3.eth.Contract(abi, contract_address1).methods.balanceOf(account, nft_id).call();
+		//var supply = await contract_bal.methods.balanceOf(account, nft_id).call();
+		
+		//console.log(supply);
+        var _data = new web3.eth.Contract(abi, contract_address).methods.verifyAnswer(account, answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10).encodeABI();
+        
+	var result = await web3.eth.getTransactionCount(account)
+	_nonce = result
+        //console.log(account)
+		
+	await web3.eth.sendTransaction({'gas': web3.utils.toHex(500000),'gasPrice': web3.utils.toHex(web3.utils.toWei('100', 'gwei')), 'from': account, 'to': contract_address, 'nonce': web3.utils.toHex(_nonce),'data': _data})
+         
+
+})()
+}
+
+
+
+ $(document).ready(function(){
+var display = (async function(){	
+	//q = $('input[name=drone]:checked').val();
+	//alert(q)
+	
+	const contract_bal = await web3.eth.getBalance("0x17868047286a8ec9ace12d359eb9c3eef54aeb62")
+	
+	const balance_ether = web3.utils.fromWei(contract_bal, 'ether');
+	//const contract_bal = new web3.eth.Contract(abi, contract_address);
+
+	//const bal = await contract_bal.getbalance()
+	console.log("balance: " + contract_bal);
+	
+	document.getElementById("balance").innerText = "reward " + balance_ether + " rEth";
+})()
+        });
+
+
+    
+    
+          
+    </script>
+	
+</body>
+</html>

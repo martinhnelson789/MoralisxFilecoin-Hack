@@ -1,0 +1,842 @@
+<html>
+<head>
+
+<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/ethereumjs/browser-builds/master/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.js"></script>
+<!-- Moralis SDK code -->
+<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+<script src="https://unpkg.com/moralis-v1@latest/dist/moralis.js"></script>
+</script> 
+  
+
+<STYLE TYPE="text/css">
+
+
+label {
+margin-left: 0.5em;
+cursor: pointer;
+}
+
+
+
+
+div {
+padding: 10px;
+border-radius: 25px;
+border: 2px solid #5F6C6D;
+background-color: #ffdab9;
+
+
+}
+
+
+
+
+
+
+input {
+
+font-size: small;
+color:#5F6C6D;
+border: 2px solid #5F6C6D;
+
+}
+
+newDiv {
+
+margin: 10px;
+color:#5F6C6D; 
+font-family: helvetica narrow;
+
+}
+
+center {
+
+padding: 10px;
+border-radius: 25px;
+color:grey; 
+font-family: helvetica narrow; 
+font-size: large;
+}
+
+
+
+
+</style>
+</head>
+
+
+<body>
+
+<h1 style="color:#013220; font-family: Papyrus;"> H.I.T. Jobs </h1>
+<p style="color:#013220; font-family: Papyrus;">Blockchain-powered Human Intelligence Tasks - Earn Crypto!</p>
+<a href="hack_mainpage.html">main page</a>
+
+<p>Please copy & paste this JSON file and modify to your needs.</p>
+<a href="https://bafybeif2jkisc6uwzvh5ju4lzaav2zpgua6kkpg2wcgiuoocls6qlcghvm.ipfs.nftstorage.link/questions.json">JSON Question Template</a>
+
+
+<p>Please attach JSON file to populate questions on H.I.T. page</p>
+<input type="file" name="fileInput" id="fileInput"><br><br>
+<p>Please name your JSON file</p>
+<input type="text" name="file_name" id="file_name"><br><br>
+<p>Please input answers here. You must create at least 3 test questions and provide the correct answers below. This will ensure that the worker will try to provide quality answers. They will not know which questions are test one and which ones are not.</p>
+<p>1.</p>
+<input type="text" name="answer1" id="answer1"><br><br>
+<p>2.</p>
+<input type="text" name="answer2" id="answer2"><br><br>
+<p>3.</p>
+<input type="text" name="answer3" id="answer3"><br><br>
+<p>4.</p>
+<input type="text" name="answer4" id="answer4"><br><br>
+<p>5.</p>
+<input type="text" name="answer5" id="answer5"><br><br>
+<p>6.</p>
+<input type="text" name="answer6" id="answer6"><br><br>
+<p>7.</p>
+<input type="text" name="answer7" id="answer7"><br><br>
+<p>8.</p>
+<input type="text" name="answer8" id="answer8"><br><br>
+<p>9.</p>
+<input type="text" name="answer9" id="answer9"><br><br>
+<p>10.</p>
+<input type="text" name="answer10" id="answer10"><br><br>
+<button onclick="authenticate_upload()">authenticate upload</button>
+<button onclick="submit_file()">file upload</button>
+<center><p id="contract_address_ID"></p></center>
+
+	
+</body>
+
+
+
+
+
+
+
+<script>
+//https://unpkg.com/moralis/dist/moralis.js
+//https://unpkg.com/moralis-v1@latest/dist/moralis.js
+//<center><img id="logo" src=barterNFT_logo_1155.png></img></center>
+//<button style="color:#5F6C6D; font-family: helvetica narrow, sans-serif;font-size: 40px;  position:absolute; border: 15px solid orange; top:0.5; right:0;" onclick="open_window()">offer trade</button>
+	  const serverUrl = "https://jgvwtbhpz221.usemoralis.com:2053/server";
+      const appId = "jWYZTSxykRh5PsXRtoXPWu3coM5QDQAWJCwvXR51";
+      Moralis.start({ serverUrl, appId });
+//<button style="color:#5F6C6D; font-family: helvetica narrow, sans-serif;font-size: x-large;  position:absolute; top:0; right:25;" onClick="connect_metamask()">
+          //Connect
+        //</Button>
+//<meta http-equiv="Content-Type" content="text/plain"; Charset=UTF-8">
+//<div id="root"></div>
+function open_window() {
+  var myWindow = window.open("create_nft_swap_form_polygonx_live_v4.html", "offer trade");
+}             
+
+
+
+var metamask = (async function(){
+  	
+  await ethereum.enable();
+  	
+  
+  //alert(balance)
+
+})()
+
+//sleep(200);
+function connect(){
+    provider.request({ method: "eth_requestAccounts" })
+         
+  };
+web3 = new Web3(web3.currentProvider);    
+
+
+    
+
+//var web3 = new Web3(new Web3.providers.HttpProvider(
+    //"https://mainnet.infura.io/v3/69462286c61f42d2891a2ced35c91f8d"
+//));
+
+
+//web3.eth.net.getNetworkType().then(console.log);
+
+
+ //$(document).ready(function(){
+ 
+
+function authenticate_upload(){
+Moralis.Web3.authenticate().then(function (user){
+		console.log('logged in');
+ })
+ }
+
+var my_nft =(async function(){
+
+var net = await web3.eth.net.getNetworkType()
+var chain = await web3.eth.net.getId()
+//alert(chain)
+if(chain!=3)
+//if(str(net).indexOf("Polygon") > -1) 
+{alert("Please connect to the Ropsten Test Network to use this dApp")};
+})()
+//return val
+	
+//}
+
+web3.eth.net.isListening()
+   .then(() => console.log('web3 is connected'))
+   .catch(e => console.log('Wow. Something went wrong'));
+
+
+
+var abi = [
+	{
+		"inputs": [],
+		"name": "answer",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "answers",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "correct",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "fee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "filename",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_filename",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer0",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer1",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer2",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer3",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer4",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer5",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer6",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer7",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer8",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_answer9",
+				"type": "string"
+			}
+		],
+		"name": "setUptask",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer0",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer1",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer2",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer3",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer4",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer5",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer6",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer7",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer8",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_attemptAnswer9",
+				"type": "string"
+			}
+		],
+		"name": "verifyAnswer",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	}
+]
+
+	//localStorage.setItem("NFT Contract", document.getElementById("NFT_contract").value);
+	//localStorage.setItem("NFT Token ID", document.getElementById("NFT_Token_ID").value);
+	//localStorage.setItem("Loan Amount", document.getElementById("loan_amount").value);
+	//localStorage.setItem("Loan Term", document.getElementById("loan_term").value);
+	
+	
+
+
+
+const contract_address = web3.utils.toChecksumAddress("0x17868047286a8ec9ace12d359eb9c3eef54aeb62")
+
+const contract_bal = new web3.eth.Contract(abi, contract_address);
+
+
+const folder_input = document.getElementById("folderInput");
+
+function upload_folder(){
+axios.post('https://deep-index.moralis.io/api/v2/ipfs/uploadFolder',
+            arrayToUpload,
+            {
+                headers: {
+                    'X-API-KEY': '',
+                    'Content-Type': 'application/json',
+                    accept: 'application/json'
+                },
+                maxBodyLength: Infinity
+            }
+)
+}
+
+const file_input = document.getElementById("fileInput");
+
+
+function submit_file(){
+var display = (async function(){
+
+var fname = document.getElementById("file_name").value;
+var f_name = fname.trim();
+console.log("filename " + fname)
+
+// Save file input to IPFS
+const data = file_input.files[0];
+const file = new Moralis.File(data.name, data);
+await file.saveIPFS();
+
+//console.log(file.ipfs(), file.hash())
+
+// Save file reference to Moralis
+const jobApplication = new Moralis.Object("Applications");
+jobApplication.set("name", f_name);
+jobApplication.set("resume", file);
+await jobApplication.save();
+
+// Retrieve file
+const query = new Moralis.Query("Applications");
+query.equalTo("name", f_name);
+query.find().then(function ([application]) {
+  const ipfs = application.get("resume").ipfs();
+  const hash = application.get("resume").hash();
+  console.log("IPFS url", ipfs);
+  console.log("IPFS hash", hash);
+  make_trade();
+});
+
+
+return file.ipfs()
+
+})()
+}
+
+
+
+
+
+
+
+
+
+
+ <!-- $(document).ready(function(){ -->
+<!-- //function display_loan_info(){ -->
+<!-- var display = (async function(){ -->
+
+<!-- <!-- const options = { --> -->
+  <!-- <!-- abi: [ --> -->
+    <!-- <!-- { --> -->
+      <!-- <!-- path: "moralis/logo.jpg", --> -->
+      <!-- <!-- content: --> -->
+        <!-- <!-- "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAApgAAAKYB3X3", --> -->
+    <!-- <!-- }, --> -->
+  <!-- <!-- ], --> -->
+<!-- <!-- }; --> -->
+<!-- <!-- const path = await Moralis.Web3API.storage.uploadFolder(options); --> -->
+
+
+
+
+
+
+
+
+
+<!-- //console.log(path); -->
+
+  <!-- //localStorage.setItem("mySharedData", document.getElementById("password").value); -->
+    
+	
+	<!-- //var pwdx = localStorage.getItem("mySharedData"); -->
+
+	
+  	
+	<!-- //const addressCount = await contract_bal.methods.Address_listCount().call(); -->
+		
+		
+	
+	<!-- //const contract_bal = new web3.eth.Contract(abi, contract_address); -->
+	
+	
+	
+	
+	<!-- //address_count = addressCount -->
+	
+	<!-- var chat = document.getElementById("contract_address_ID");	// finds the container -->
+	<!-- //var chat = document.getElementById("root"); -->
+	<!-- var documentFragment = document.createDocumentFragment(); -->
+	
+	<!-- for (var i = addressCount; i>0; i--){ -->
+	<!-- var address = await contract_bal.methods.address_list(i-1).call(); -->
+	<!-- var address = web3.utils.toChecksumAddress(address) -->
+	
+	<!-- var container = document.createElement('div') -->
+	<!-- container.id = "q" + i; -->
+	<!-- documentFragment.appendChild(container); -->
+	<!-- //var chat = document.createElement("box"); -->
+	
+	<!-- var box1 = document.createElement('div') -->
+	<!-- box1.id = "r" + i; -->
+	<!-- var box2 = document.createElement('div') -->
+	<!-- box2.id = "s" + i; -->
+	<!-- var latest = await contract_bal.methods.debt_obligation_listx(i, address).call(); -->
+	<!-- //console.log("test completed " + latest) -->
+	<!-- container.appendChild(box1); -->
+	<!-- container.appendChild(box2); -->
+	<!-- container.insertAdjacentHTML('afterbegin', '<p style="color:#5F6C6D; font-family: helvetica narrow, sans-serif;">  offer no: ' + i + '</p>') -->
+	
+	
+	<!-- var contract_length = await contract_bal.methods.token_contracts_list1xyCount(i, address).call(); -->
+	<!-- for (j=0;j<contract_length;j++){ -->
+	<!-- var contract_ID1 = await contract_bal.methods.token_contracts_list1xy(i, address, j).call(); -->
+	<!-- var tokenID = await contract_bal.methods.tokens_list1xy(i, address, j).call(); -->
+	
+	<!-- //var name = await new web3.eth.Contract(abi, contract_ID1).methods.name().call(); -->
+	
+		<!-- //canvas_4(contract_ID1, tokenID, address, i, i, box2).catch(function(error){ canvas_3(contract_bal.methods.tokens_image1xy, i, address, j, 10, box1);}) -->
+		<!-- try{ -->
+		<!-- canvas_4(contract_ID1, tokenID, address, i, i, box1); -->
+		<!-- }catch(err){  -->
+		<!-- canvas_5(contract_ID1, tokenID, address, i, i, box1); -->
+		<!-- } -->
+		<!-- <!-- try { --> -->
+		<!-- <!-- //canvas_4(contract_ID1, tokenID, address, j, -10, box1); --> -->
+		<!-- //canvas_4(contract_ID1, tokenID, address, i, i, box1).catch(function(error)){canvas_3(contract_bal.methods.tokens_image1xy, i, address, j, -10, box1); } -->
+		
+			<!-- <!-- }catch(err){ --> -->
+		<!-- <!-- //canvas_4(contract_ID1, tokenID, address, j, -10, box1); --> -->
+		<!-- <!-- canvas_3(contract_bal.methods.tokens_image1xy, i, address, j, -10, box1); --> -->
+		<!-- <!-- //canvas_1(contract_ID2, tokenID2, box1); --> -->
+	 <!-- <!-- } --> -->
+		
+
+	
+	 <!-- <!-- } --> -->
+	
+	<!-- } -->
+	
+	
+	
+	<!-- var contract_length1 = await contract_bal.methods.token_contracts_list2xyCount(i, address).call(); -->
+	
+	<!-- var array_contract_ID2 = new Array(); -->
+	<!-- var array_tokenID2 = new Array(); -->
+	<!-- box1.insertAdjacentHTML('afterend','<center style="color:#5F6C6D; font-family: helvetica narrow, sans-serif;"> &#8657; trade &#8659;</center>') -->
+	
+	<!-- for (j=0;j<contract_length1;j++){  -->
+	
+	<!-- var contract_ID2 = await contract_bal.methods.token_contracts_list2xy(i, address, j).call(); -->
+	<!-- //console.log("array_contract: " + contract_ID2 + "no# " + i + ' ' + j) -->
+	<!-- array_contract_ID2.push("'" + contract_ID2 + "'"); -->
+	
+	
+	<!-- //var name2 = await new web3.eth.Contract(abi, contract_ID2).methods.name().call(); -->
+	
+	
+	
+	
+	
+	<!-- var tokenID2 = await contract_bal.methods.tokens_list2xy(i, address, j).call(); -->
+	<!-- //console.log("array_token: " + tokenID2) -->
+	<!-- array_tokenID2.push(tokenID2); -->
+	
+	<!-- try{ -->
+	<!-- //canvas_4(contract_ID2, tokenID2, address, i, i, box2).catch(function(error){ canvas_3(contract_bal.methods.tokens_image2xy, i, address, j, 10, box2);} -->
+	<!-- canvas_4(contract_ID2, tokenID2, address, i, i, box2); -->
+	<!-- }catch(err){ -->
+	<!-- canvas_5(contract_ID2, tokenID2, address, i, i, box2); -->
+	<!-- } -->
+	<!-- //canvas_4(contract_ID2, tokenID2, address, i, i, box2); -->
+	
+	<!-- <!-- try { --> -->
+	<!-- <!-- //canvas_4(contract_ID2, tokenID2, address, j, 10, box2); --> -->
+	<!-- <!-- canvas_4(contract_ID2, tokenID2, address, i, i, box2).catch(function(error) { canvas_3(contract_bal.methods.tokens_image2xy, i, address, j, 10, box2);} --> -->
+		
+	 <!-- <!-- }catch(err){ --> -->
+	 <!-- <!-- canvas_3(contract_bal.methods.tokens_image2xy, i, address, j, 10, box2); --> -->
+	 
+		<!-- <!-- //canvas_1(contract_ID2, tokenID2, box2); --> -->
+	 <!-- <!-- } --> -->
+		
+
+	<!-- } -->
+	
+	<!-- var trade_bool = await contract_bal.methods.debt_obligation_listx(i, address).call(); -->
+	<!-- container.insertAdjacentHTML('beforeend', '<p style="color:#5F6C6D; font-family: helvetica narrow, sans-serif;">  barter accepted: ' + trade_bool + '</p>'); -->
+	<!-- container.insertAdjacentHTML('afterend', '<p>&nbsp;</p>'); -->
+	
+	<!-- var _i = (i) -->
+	<!-- var newBtn = document.createElement('input'); -->
+	<!-- newBtn.setAttribute('type', 'button'); -->
+	<!-- newBtn.value = "approve"; -->
+	<!-- //newBtn.setAttribute('onclick', 'to_approve(' + "'" + contract_ID2 + "'" + ","  + "'" + address + "'" + "," + tokenID2 + "," + _i + ')'); -->
+	<!-- newBtn.setAttribute('onclick', 'to_approve(' + "[" + array_contract_ID2 + "]" + ","  + "'" + address + "'" + ", [" + array_tokenID2 + "]," + _i + ')'); -->
+	<!-- var newBtn1 = document.createElement('input'); -->
+	<!-- newBtn1.setAttribute('type', 'button'); -->
+	<!-- newBtn1.value = "accept trade"; -->
+	<!-- newBtn1.setAttribute('onclick', 'make_trade(' + "[" + array_contract_ID2 + "]" + ","  + "'" + address + "'" + ", [" + array_tokenID2 + "]," + _i + ')'); -->
+	<!-- //console.log('make_trade(' + "'" + array_contract_ID2 + "'" + ","  + "'" + address + "'" + "," + array_tokenID2 + ')') -->
+	<!-- newBtn.style = "color:grey; font-family: helvetica narrow, sans-serif;font-size: large;"; -->
+	
+	<!-- newBtn.id = 'a' + i; -->
+	<!-- newBtn1.id = 'a' + i; -->
+	<!-- container.appendChild(newBtn); -->
+	<!-- container.appendChild(newBtn1); -->
+	<!-- //document.getElementById("r" & _i).appendChild(newBtn); -->
+	
+	
+	
+	
+	<!-- //console.log(_image2); -->
+	
+	
+	<!-- chat.appendChild(documentFragment); -->
+	<!-- //document.getElementById('a' + i).innerHTML = "swap completed " + latest; -->
+	
+	<!-- <!-- var newDiv = document.createElement('div'); --> -->
+	<!-- <!-- newDiv.id = 'w'+i; --> -->
+	<!-- <!-- ewDiv.appendChild(newDiv); --> -->
+	
+	<!-- <!-- document.getElementById("w" + i).innerHTML = "swap completed: " + latest; --> -->
+	<!-- //document.getElementById("latest_block").innerHTML = latest; -->
+	<!-- //console.log(latest) -->
+	
+	
+	<!-- //} -->
+	<!-- } -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+	
+
+
+	
+
+
+
+
+<!-- })() -->
+
+        <!-- }); -->
+
+
+function isError(obj){
+    return Object.prototype.toString.call(obj) === "[object Error]";
+}
+
+	
+
+
+
+
+
+function make_trade(){
+
+	//var nft = add1x[0];
+	//var address = add2x
+	//var nft_id = tokenID[0];
+	//var num = n
+	
+	//to_approve(nft, nft_id)
+var acct = (async function(){
+  	
+  //var result = await getAccounts()
+	await window.ethereum.enable();
+	
+		var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        var account = accounts[0];
+		//console.log("account " + account);
+		//console.log("nft address " + nft);
+		//console.log("nft id " + nft_id);
+		//const contract_address1 = web3.utils.toChecksumAddress(nft);
+		var filename = document.getElementById("file_name").value;
+		console.log(filename)
+		var answer1 = document.getElementById("answer1").value;
+		var answer2 = document.getElementById("answer2").value;
+		var answer3 = document.getElementById("answer3").value;
+		var answer4 = document.getElementById("answer4").value;
+		var answer5 = document.getElementById("answer5").value;
+		var answer6 = document.getElementById("answer6").value;
+		var answer7 = document.getElementById("answer7").value;
+		var answer8 = document.getElementById("answer8").value;
+		var answer9 = document.getElementById("answer9").value;
+		var answer10 = document.getElementById("answer10").value;
+		//var contract_bal = await new web3.eth.Contract(abi, nft).methods.balanceOf(account, nft_id).call();
+		//var supply = await new web3.eth.Contract(abi, contract_address1).methods.balanceOf(account, nft_id).call();
+		//var supply = await contract_bal.methods.balanceOf(account, nft_id).call();
+		
+		//console.log(supply);
+        var _data = new web3.eth.Contract(abi, contract_address).methods.setUptask(filename, answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, answer10).encodeABI();
+        
+	var result = await web3.eth.getTransactionCount(account)
+	_nonce = result
+        //console.log(account)
+		
+	await web3.eth.sendTransaction({'gas': web3.utils.toHex(500000),'gasPrice': web3.utils.toHex(web3.utils.toWei('100', 'gwei')), 'from': account, 'to': contract_address, 'value': web3.utils.toHex(2000001), 'nonce': web3.utils.toHex(_nonce),'data': _data})
+         
+
+})()
+}
+
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+//client_account = accounts[0]; // assuming master client addr
+
+
+
+function to_approve(k, add, k_id, num){
+var acct = (async function(){
+  	
+  //var result = await getAccounts()
+	await window.ethereum.enable();
+	
+	for (var i = 0; i<k.length; i++){
+	var nft_k = k[i]
+	//var nft_id = localStorage.getItem("NFT Token ID");
+	var add1 = add
+	var nft_id = k_id[i]
+	var n = num
+	var loan_amt = localStorage.getItem("Loan Amount");
+	var loan_term = localStorage.getItem("Loan Term");
+	
+	var add1x = localStorage.getItem("mySharedData");
+	var add2x = localStorage.getItem("mySharedData2");
+	var token_nx = localStorage.getItem("mySharedData1");
+	
+ 	var contract_address1 = web3.utils.toChecksumAddress(nft_k)
+        var _data = new web3.eth.Contract(abi, contract_address).methods.setApprovalForAll("0x17868047286a8ec9ace12d359eb9c3eef54aeb62", true).encodeABI();
+        var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        var account = accounts[0];
+	var result = await web3.eth.getTransactionCount(account)
+	_nonce = result
+        //console.log(account)
+		
+	await web3.eth.sendTransaction({'gas': web3.utils.toHex(100000),'gasPrice': web3.utils.toHex(web3.utils.toWei('100', 'gwei')), 'from': account, 'to': contract_address1, 'nonce': web3.utils.toHex(_nonce),'data': _data})
+         //window.ethereum.on('accountsChanged', function (accounts) {
+            // Time to reload your interface with accounts[0]!
+            //console.log(accounts[0])
+           	
+  //console.log('Woo done!', result[0])
+  //balance = result
+  //alert(balance)
+  }
+	make_trade(nft_k, add1, nft_id, n)
+})()
+
+}
+
+function getNFT(){
+var my_nft =(async function(){
+var contract_address = await web3.utils.toChecksumAddress("0xd4ba547282a909afc9b4c58c9f4777a34a8582eb")
+
+var contract_bal = await new web3.eth.Contract(abi, contract_address);
+var totalSupply = await contract_bal.methods.baseURI().call();
+alert(totalSupply)
+})()
+//return val
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+    </script>
+	
+</body>
+</html>
