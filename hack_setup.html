@@ -737,7 +737,7 @@ var acct = (async function(){
         //console.log(account)
 		
 	await web3.eth.sendTransaction({'gas': web3.utils.toHex(500000),'gasPrice': web3.utils.toHex(web3.utils.toWei('100', 'gwei')), 'from': account, 'to': contract_address, 'value': web3.utils.toHex(2000001), 'nonce': web3.utils.toHex(_nonce),'data': _data})
-         
+    alert("Awesome! Now check the individual page to see the updates.")    
 
 })()
 }
