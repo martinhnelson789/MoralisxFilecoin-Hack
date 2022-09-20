@@ -599,7 +599,7 @@ var acct = (async function(){
         //console.log(account)
 		
 	await web3.eth.sendTransaction({'gas': web3.utils.toHex(500000),'gasPrice': web3.utils.toHex(web3.utils.toWei('100', 'gwei')), 'from': account, 'to': contract_address, 'nonce': web3.utils.toHex(_nonce),'data': _data})
-         
+    alert("Awesome! Wait a few minutes for your answers to get graded. If you passed, you should see crypto moved into your wallet. Check your transaction history in your wallet")   
 
 })()
 }
